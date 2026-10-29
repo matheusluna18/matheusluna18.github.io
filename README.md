@@ -23,6 +23,6 @@ style.css           estilos partilhados pelas duas versões
 img/                foto, favicon e ilustrações dos projetos
 ```
 
-## Publicar no GitHub Pages
+## Online
 
 Publicado em **https://matheusluna18.github.io** (ramo `main`).
