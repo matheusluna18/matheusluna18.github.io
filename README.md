@@ -25,12 +25,4 @@ img/                foto, favicon e ilustrações dos projetos
 
 ## Publicar no GitHub Pages
 
-1. Criar um repositório chamado `matheusluna18.github.io`
-2. Enviar estes ficheiros para o ramo `main`
-3. O site fica em https://matheusluna18.github.io
-
-Depois de publicado, acrescentar no `<head>` das duas páginas a imagem de partilha:
-
-```html
-<meta property="og:image" content="https://matheusluna18.github.io/img/perfil.jpg">
-```
+Publicado em **https://matheusluna18.github.io** (ramo `main`).
