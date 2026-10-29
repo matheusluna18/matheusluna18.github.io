@@ -1,0 +1,915 @@
+/* ==========================================
+   Portfólio - Matheus Luna
+   Tarefa 9: Boas Práticas em HTML e CSS
+
+   1. Variáveis
+   2. Base
+   3. Acessibilidade
+   4. Peças reutilizáveis
+   5. Navegação
+   6. Apresentação (perfil)
+   7. Números
+   8. Trajetória e formação
+   9. Projetos
+   10. Competências
+   11. Contacto e formulário
+   12. Rodapé
+   13. Ecrãs maiores
+   14. Impressão
+   ========================================== */
+
+
+/* 1. Variáveis ----------------------------- */
+:root {
+  /* Cores: azul-petróleo (tecnologia) + âmbar (o lado da cozinha) */
+  --cor-primaria: #0e7490;
+  --cor-primaria-escura: #155e75;
+  --cor-primaria-clara: #e0f2f7;
+  --cor-sobre-primaria: #ffffff; /* texto em cima da cor primária */
+  --cor-destaque: #d97706;
+  --cor-texto: #0f172a;
+  --cor-suave: #475569;
+  --cor-fundo: #f6f8fa;
+  --cor-cartao: #ffffff;
+  --cor-borda: #e2e8f0;
+  --cor-erro: #dc2626;
+  --cor-sucesso: #16a34a;
+  --cor-aviso: #b45309;
+
+  /* Tipografia */
+  --fonte-texto: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --fonte-mono: ui-monospace, "Cascadia Code", "SF Mono", Consolas, monospace;
+
+  /* Espaçamentos (múltiplos da mesma base) */
+  --espacamento: 1rem;
+  --espaco-p: calc(var(--espacamento) * 0.5);
+  --espaco-m: calc(var(--espacamento) * 1.5);
+  --espaco-g: calc(var(--espacamento) * 2);
+  --espaco-xg: calc(var(--espacamento) * 5);
+
+  /* Outros */
+  --raio: 12px;
+  --sombra: 0 1px 3px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.05);
+  --sombra-forte: 0 12px 32px rgba(15, 23, 42, 0.12);
+  --largura-max: 1080px;
+  --altura-topo: 64px;
+}
+
+/* Modo escuro: só mudam as cores */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cor-primaria: #22d3ee;
+    --cor-primaria-escura: #67e8f9;
+    --cor-primaria-clara: #0f2a33;
+    --cor-sobre-primaria: #0b1120;
+    --cor-destaque: #fbbf24;
+    --cor-texto: #e2e8f0;
+    --cor-suave: #94a3b8;
+    --cor-fundo: #0b1120;
+    --cor-cartao: #111a2e;
+    --cor-borda: #1e293b;
+    --cor-erro: #f87171;
+    --cor-sucesso: #4ade80;
+    --cor-aviso: #fbbf24;
+    --sombra: none;
+    --sombra-forte: 0 12px 32px rgba(0, 0, 0, 0.4);
+  }
+}
+
+
+/* 2. Base ---------------------------------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* As âncoras não ficam escondidas atrás do menu fixo */
+  scroll-padding-top: var(--altura-topo);
+}
+
+body {
+  margin: 0;
+  font-family: var(--fonte-texto);
+  line-height: 1.6;
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0 0 var(--espacamento);
+}
+
+/* Corta o fundo de pontos da apresentação, que sai para os lados */
+main {
+  overflow-x: clip;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--cor-primaria);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--cor-primaria-escura);
+}
+
+::selection {
+  color: var(--cor-sobre-primaria);
+  background: var(--cor-primaria);
+}
+
+
+/* 3. Acessibilidade ------------------------ */
+:focus-visible {
+  outline: 3px solid var(--cor-destaque);
+  outline-offset: 3px;
+}
+
+.saltar {
+  position: absolute;
+  top: -100px;
+  left: var(--espacamento);
+  z-index: 100;
+  padding: var(--espaco-p) var(--espacamento);
+  color: var(--cor-sobre-primaria);
+  background: var(--cor-primaria);
+  border-radius: var(--raio);
+}
+
+.saltar:focus {
+  top: var(--espacamento);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* 4. Peças reutilizáveis ------------------- */
+.container {
+  width: 100%;
+  max-width: var(--largura-max);
+  margin: 0 auto;
+  padding: 0 var(--espacamento);
+}
+
+.secao {
+  padding-top: var(--espaco-xg);
+  counter-increment: secao;
+}
+
+.secao-pre {
+  margin-bottom: var(--espaco-p);
+  font-family: var(--fonte-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--cor-primaria);
+}
+
+/* Numeração automática das secções: 01, 02, 03... */
+.secao .secao-pre::before {
+  content: counter(secao, decimal-leading-zero) ". ";
+  color: var(--cor-destaque);
+}
+
+.secao-titulo {
+  margin-bottom: var(--espacamento);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  letter-spacing: -0.02em;
+}
+
+.secao-intro {
+  max-width: 60ch;
+  color: var(--cor-suave);
+}
+
+.cartao {
+  padding: var(--espaco-m);
+  background: var(--cor-cartao);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+}
+
+.cartao-titulo {
+  margin-bottom: var(--espacamento);
+  font-size: 1.1rem;
+}
+
+.botao {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--cor-sobre-primaria);
+  background: var(--cor-primaria);
+  border: 2px solid var(--cor-primaria);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.botao:hover {
+  color: var(--cor-sobre-primaria);
+  background: var(--cor-primaria-escura);
+  border-color: var(--cor-primaria-escura);
+}
+
+.botao-contorno {
+  color: var(--cor-primaria);
+  background: transparent;
+}
+
+/* Botão redondo só com ícone (LinkedIn, GitHub) */
+.botao-icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--cor-texto);
+  border: 2px solid var(--cor-borda);
+  border-radius: 50%;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.botao-icone:hover {
+  color: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+}
+
+.etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-p);
+  margin: 0 0 var(--espaco-g);
+  padding: 0;
+  list-style: none;
+}
+
+.etiqueta {
+  padding: 0.2rem 0.7rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.8rem;
+  color: var(--cor-primaria);
+  background: var(--cor-primaria-clara);
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+}
+
+.lista {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.lista li {
+  margin-bottom: 0.35rem;
+}
+
+.lista li::marker {
+  color: var(--cor-destaque);
+}
+
+/* Texto secundário dentro de uma lista (cargo, ano...) */
+.lista span {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--cor-suave);
+}
+
+/* Bolinha de estado (ex.: disponível) */
+.ponto::before {
+  content: "";
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-right: 0.45rem;
+  background: var(--cor-sucesso);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--cor-sucesso) 25%, transparent);
+}
+
+
+/* 5. Navegação ----------------------------- */
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--cor-fundo) 85%, transparent);
+  border-bottom: 1px solid var(--cor-borda);
+  backdrop-filter: blur(10px);
+}
+
+.topo-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaco-g);
+  min-height: var(--altura-topo);
+}
+
+.topo-logo {
+  font-family: var(--fonte-mono);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--cor-texto);
+}
+
+.topo-logo span {
+  color: var(--cor-destaque);
+}
+
+/* Em telemóvel o menu desliza para o lado, sem JavaScript */
+.topo-menu {
+  display: flex;
+  margin: 0 0 0 auto; /* encosta o menu à direita, junto ao PT/EN */
+  gap: calc(var(--espacamento) * 1.25);
+  padding: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+  list-style: none;
+  scrollbar-width: none;
+  /* Esbate o fim para mostrar que há mais para deslizar */
+  mask-image: linear-gradient(to right, #000 80%, transparent);
+}
+
+.topo-menu a {
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--cor-suave);
+}
+
+.topo-menu a:hover {
+  color: var(--cor-primaria);
+}
+
+/* Botão PT / EN */
+.topo-lingua {
+  flex-shrink: 0;
+  padding: 0.2rem 0.55rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--cor-primaria);
+  border: 1px solid var(--cor-primaria);
+  border-radius: 6px;
+}
+
+.topo-lingua:hover {
+  color: var(--cor-sobre-primaria);
+  background: var(--cor-primaria);
+}
+
+
+/* 6. Apresentação (perfil) ----------------- */
+.perfil {
+  position: relative;
+  display: grid;
+  gap: var(--espaco-g);
+  padding-top: var(--espaco-xg);
+}
+
+/* Grelha de pontos no fundo, a desaparecer para baixo */
+.perfil::before {
+  content: "";
+  position: absolute;
+  inset: 0 -50vw;
+  z-index: -1;
+  background-image: radial-gradient(var(--cor-borda) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(to bottom, #000 30%, transparent);
+}
+
+.perfil-nome {
+  margin-bottom: var(--espacamento);
+  font-size: clamp(2.8rem, 8vw, 4.75rem);
+  letter-spacing: -0.03em;
+}
+
+.perfil-resumo {
+  max-width: 52ch;
+  margin-bottom: var(--espaco-m);
+  font-size: 1.15rem;
+  color: var(--cor-suave);
+}
+
+.perfil-resumo strong {
+  color: var(--cor-texto);
+}
+
+.perfil-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.perfil-figura {
+  margin: 0;
+  justify-self: center;
+  text-align: center;
+}
+
+/* Anel com gradiente à volta da foto */
+.perfil-moldura {
+  width: 212px;
+  margin: 0 auto var(--espacamento);
+  padding: 6px;
+  background: linear-gradient(135deg, var(--cor-primaria), var(--cor-destaque));
+  border-radius: 50%;
+}
+
+.perfil-foto {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: var(--cor-borda);
+}
+
+.perfil-local {
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.perfil-disponivel {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--cor-suave);
+}
+
+
+/* 7. Números ------------------------------- */
+.numeros {
+  padding-top: var(--espaco-xg);
+}
+
+.numeros-lista {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--espacamento);
+  margin: 0;
+}
+
+.numero {
+  display: flex;
+  flex-direction: column-reverse; /* o valor aparece em cima do rótulo */
+  padding: var(--espacamento);
+  background: var(--cor-cartao);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+}
+
+.numero dt {
+  font-size: 0.9rem;
+  color: var(--cor-suave);
+}
+
+.numero dd {
+  margin: 0;
+  font-family: var(--fonte-mono);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--cor-primaria);
+}
+
+
+/* 8. Trajetória e formação ----------------- */
+.linha {
+  margin: var(--espaco-g) 0 0;
+  padding: 0;
+  list-style: none;
+  border-left: 2px solid var(--cor-borda);
+}
+
+.linha-item {
+  position: relative;
+  padding: 0 0 var(--espaco-g) var(--espaco-g);
+}
+
+/* Bolinha na linha do tempo */
+.linha-item::before {
+  content: "";
+  position: absolute;
+  top: 0.3rem;
+  left: -9px;
+  width: 16px;
+  height: 16px;
+  background: var(--cor-fundo);
+  border: 3px solid var(--cor-primaria);
+  border-radius: 50%;
+}
+
+/* O capítulo atual pulsa devagar */
+.linha-item-atual::before {
+  background: var(--cor-destaque);
+  border-color: var(--cor-destaque);
+  animation: pulsar 2.4s ease-out infinite;
+}
+
+@keyframes pulsar {
+  from {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--cor-destaque) 50%, transparent);
+  }
+  to {
+    box-shadow: 0 0 0 12px transparent;
+  }
+}
+
+.linha-data {
+  margin-bottom: 0.2rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.8rem;
+  color: var(--cor-suave);
+}
+
+.linha-titulo {
+  margin-bottom: var(--espaco-p);
+  font-size: 1.4rem;
+}
+
+.linha-item p,
+.linha-detalhes {
+  max-width: 65ch;
+}
+
+.linha-licao {
+  padding: var(--espaco-p) var(--espacamento);
+  font-size: 0.95rem;
+  background: var(--cor-primaria-clara);
+  border-left: 3px solid var(--cor-primaria);
+  border-radius: 0 var(--raio) var(--raio) 0;
+}
+
+/* Lista que abre e fecha (sem JavaScript) */
+.linha-detalhes {
+  margin-bottom: var(--espacamento);
+}
+
+.linha-detalhes summary {
+  width: fit-content;
+  margin-bottom: var(--espaco-p);
+  font-weight: 600;
+  color: var(--cor-primaria);
+  cursor: pointer;
+}
+
+.formacao {
+  display: grid;
+  gap: var(--espaco-m);
+  margin: var(--espaco-g) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.formacao-item {
+  border-top: 3px solid var(--cor-primaria);
+}
+
+.formacao-item-atual {
+  border-top-color: var(--cor-destaque);
+}
+
+.formacao-data {
+  margin-bottom: var(--espaco-p);
+  font-family: var(--fonte-mono);
+  font-size: 0.8rem;
+  color: var(--cor-suave);
+}
+
+.formacao-escola {
+  margin: 0;
+  color: var(--cor-suave);
+}
+
+
+/* 9. Projetos ------------------------------ */
+.projetos {
+  display: grid;
+  gap: var(--espaco-m);
+  margin: var(--espaco-g) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.projeto {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--cor-cartao);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.projeto:hover {
+  transform: translateY(-4px);
+  border-color: var(--cor-primaria);
+  box-shadow: var(--sombra-forte);
+}
+
+.projeto-imagem {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--cor-primaria-clara);
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.projeto-corpo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: calc(var(--espacamento) * 1.25);
+}
+
+.projeto-corpo p {
+  font-size: 0.95rem;
+  color: var(--cor-suave);
+}
+
+.projeto-titulo {
+  margin: 0.6rem 0 var(--espaco-p);
+  font-size: 1.15rem;
+}
+
+/* Empurra as tecnologias para o fundo do cartão */
+.projeto-tec {
+  margin: auto 0 0;
+  padding-top: var(--espaco-p);
+  font-family: var(--fonte-mono);
+  font-size: 0.8rem;
+  border-top: 1px dashed var(--cor-borda);
+}
+
+/* Etiqueta de estado do projeto */
+.estado {
+  align-self: flex-start;
+  padding: 0.1rem 0.6rem;
+  font-family: var(--fonte-mono);
+  font-size: 0.75rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+}
+
+.estado-feito {
+  color: var(--cor-sucesso);
+}
+
+.estado-curso {
+  color: var(--cor-aviso);
+}
+
+.estado-plano {
+  color: var(--cor-suave);
+}
+
+
+/* 10. Competências ------------------------- */
+.grupos {
+  display: grid;
+  gap: var(--espaco-m);
+  margin-top: var(--espaco-g);
+}
+
+.info-lista {
+  margin: 0;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--espacamento);
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed var(--cor-borda);
+}
+
+.info-item dd {
+  margin: 0;
+  font-family: var(--fonte-mono);
+  font-size: 0.85rem;
+  color: var(--cor-suave);
+}
+
+
+/* 11. Contacto e formulário ---------------- */
+.contacto {
+  display: grid;
+  gap: var(--espaco-g);
+  margin-top: var(--espaco-g);
+}
+
+.contacto-texto {
+  font-size: 1.1rem;
+}
+
+.lista-contacto {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lista-contacto li {
+  margin-bottom: var(--espaco-p);
+  overflow-wrap: anywhere;
+}
+
+.lista-contacto a {
+  font-family: var(--fonte-mono);
+  font-size: 0.95rem;
+}
+
+.formulario {
+  display: grid;
+  gap: var(--espacamento);
+}
+
+.nota {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--cor-suave);
+}
+
+.obrigatorio {
+  color: var(--cor-erro);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.campo label {
+  font-weight: 600;
+}
+
+.campo input,
+.campo textarea {
+  padding: 0.75rem;
+  font: inherit;
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio);
+  transition: border-color 0.2s;
+}
+
+.campo input:focus,
+.campo textarea:focus {
+  border-color: var(--cor-primaria);
+}
+
+/* Só fica vermelho depois de o utilizador mexer no campo */
+.campo input:user-invalid,
+.campo textarea:user-invalid {
+  border-color: var(--cor-erro);
+}
+
+.campo textarea {
+  resize: vertical;
+}
+
+.ajuda {
+  font-size: 0.85rem;
+  color: var(--cor-suave);
+}
+
+.formulario .botao {
+  justify-self: start;
+}
+
+
+/* 12. Rodapé ------------------------------- */
+.rodape {
+  margin-top: var(--espaco-xg);
+  padding: var(--espaco-g) 0;
+  border-top: 1px solid var(--cor-borda);
+}
+
+.rodape-conteudo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--espacamento);
+}
+
+.rodape-texto {
+  margin: 0;
+  font-family: var(--fonte-mono);
+  font-size: 0.85rem;
+  color: var(--cor-suave);
+}
+
+.rodape-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--espacamento) * 1.25);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rodape-links a {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.rodape-links a:hover {
+  text-decoration: underline;
+}
+
+
+/* 13. Ecrãs maiores ------------------------ */
+@media (min-width: 640px) {
+  .numeros-lista {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .projetos,
+  .grupos,
+  .formacao {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .topo-menu {
+    gap: var(--espaco-g);
+    mask-image: none;
+  }
+
+  .perfil {
+    grid-template-columns: 1.5fr 1fr;
+    align-items: center;
+  }
+
+  .projetos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grupos,
+  .formacao {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .contacto {
+    grid-template-columns: 1fr 1.2fr;
+    align-items: start;
+  }
+}
+
+
+/* 14. Impressão ---------------------------- */
+/* Ao imprimir (ou guardar em PDF) fica só o essencial */
+@media print {
+  .saltar,
+  .topo,
+  .perfil-acoes,
+  .formulario,
+  .rodape-links {
+    display: none;
+  }
+
+  body {
+    color: #000;
+    background: #fff;
+  }
+
+  .perfil::before {
+    display: none;
+  }
+
+  .projeto,
+  .linha-item,
+  .cartao {
+    break-inside: avoid;
+  }
+}

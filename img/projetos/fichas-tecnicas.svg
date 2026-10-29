@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="sans-serif">
+  <rect width="800" height="500" fill="#e0f2f7"/>
+  <rect x="80" y="60" width="640" height="380" rx="16" fill="#fff" stroke="#0e7490" stroke-width="3"/>
+  <path d="M96 60h608a16 16 0 0 1 16 16v28H80V76a16 16 0 0 1 16-16z" fill="#0e7490"/>
+  <circle cx="110" cy="82" r="7" fill="#d97706"/><circle cx="134" cy="82" r="7" fill="#f6f8fa"/><circle cx="158" cy="82" r="7" fill="#f6f8fa"/>
+
+  <text x="110" y="150" font-size="28" font-weight="700" fill="#0f172a">Ficha técnica · Risotto</text>
+  <circle cx="580" cy="265" r="95" fill="#d97706"/>
+  <circle cx="580" cy="265" r="65" fill="#fde7c3"/>
+  <g font-size="18" fill="#0f172a">
+    <text x="110" y="200">Arroz arbóreo</text><text x="400" y="200" text-anchor="end">320 g</text>
+    <text x="110" y="240">Caldo de legumes</text><text x="400" y="240" text-anchor="end">1,2 L</text>
+    <text x="110" y="280">Parmesão</text><text x="400" y="280" text-anchor="end">80 g</text>
+    <text x="110" y="320">Manteiga</text><text x="400" y="320" text-anchor="end">40 g</text>
+  </g>
+  <g stroke="#e2e8f0"><line x1="110" y1="212" x2="400" y2="212"/><line x1="110" y1="252" x2="400" y2="252"/><line x1="110" y1="292" x2="400" y2="292"/></g>
+  <rect x="110" y="360" width="160" height="40" rx="20" fill="#0e7490"/>
+  <text x="190" y="386" text-anchor="middle" font-size="16" fill="#fff">Rende 4 doses</text>
+</svg>

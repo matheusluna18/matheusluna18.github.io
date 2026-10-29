@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="sans-serif">
+  <rect width="800" height="500" fill="#e0f2f7"/>
+  <rect x="80" y="60" width="640" height="380" rx="16" fill="#fff" stroke="#0e7490" stroke-width="3"/>
+  <path d="M96 60h608a16 16 0 0 1 16 16v28H80V76a16 16 0 0 1 16-16z" fill="#0e7490"/>
+  <circle cx="110" cy="82" r="7" fill="#d97706"/><circle cx="134" cy="82" r="7" fill="#f6f8fa"/><circle cx="158" cy="82" r="7" fill="#f6f8fa"/>
+
+  <text x="110" y="150" font-size="28" font-weight="700" fill="#0f172a">CMV por prato · Polvo à lagareiro</text>
+  <g font-size="18" fill="#475569"><text x="110" y="205">Custo</text><text x="310" y="205">Preço</text><text x="510" y="205">Margem</text></g>
+  <g font-size="40" font-weight="700"><text x="110" y="255" fill="#0f172a">4,90 €</text><text x="310" y="255" fill="#0f172a">18,50 €</text><text x="510" y="255" fill="#16a34a">74%</text></g>
+  <rect x="110" y="295" width="580" height="24" rx="12" fill="#e0f2f7"/>
+  <rect x="110" y="295" width="154" height="24" rx="12" fill="#d97706"/>
+  <text x="110" y="360" font-size="17" fill="#475569">CMV 26% · dentro do objetivo (até 30%)</text>
+</svg>

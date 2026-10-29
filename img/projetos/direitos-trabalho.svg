@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="sans-serif">
+  <rect width="800" height="500" fill="#e0f2f7"/>
+  <rect x="80" y="60" width="640" height="380" rx="16" fill="#fff" stroke="#0e7490" stroke-width="3"/>
+  <path d="M96 60h608a16 16 0 0 1 16 16v28H80V76a16 16 0 0 1 16-16z" fill="#0e7490"/>
+  <circle cx="110" cy="82" r="7" fill="#d97706"/><circle cx="134" cy="82" r="7" fill="#f6f8fa"/><circle cx="158" cy="82" r="7" fill="#f6f8fa"/>
+
+  <text x="110" y="150" font-size="28" font-weight="700" fill="#0f172a">Quanto tenho a receber?</text>
+  <g font-size="16" fill="#475569"><text x="110" y="195">Salário base</text><text x="110" y="265">Anos de contrato</text></g>
+  <rect x="110" y="205" width="260" height="40" rx="8" fill="#f6f8fa" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="125" y="232" font-size="18" fill="#0f172a">950 €</text>
+  <rect x="110" y="275" width="260" height="40" rx="8" fill="#f6f8fa" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="125" y="302" font-size="18" fill="#0f172a">3</text>
+  <rect x="420" y="190" width="270" height="170" rx="12" fill="#e0f2f7"/>
+  <text x="440" y="230" font-size="16" fill="#475569">Estimativa</text>
+  <text x="440" y="285" font-size="40" font-weight="700" fill="#0e7490">3 420 €</text>
+  <text x="440" y="320" font-size="14" fill="#475569">Valor indicativo</text>
+  <rect x="110" y="345" width="160" height="40" rx="20" fill="#0e7490"/>
+  <text x="190" y="371" text-anchor="middle" font-size="16" fill="#fff">Calcular</text>
+</svg>
